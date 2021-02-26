@@ -1,1 +1,1 @@
-# game-of-dice
+# The Game Of Dice
