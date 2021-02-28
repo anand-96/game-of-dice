@@ -2,17 +2,59 @@ name: Ruby
 
 on: [push,pull_request]
 
+name: Run linter and Rspecs on main branch
+on:
+  push:
+    branches:
+      - main
+
 jobs:
-  build:
+  linters:
+    name: Linters
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 3.0.0
-    - name: Run the default task
-      run: |
-        gem install bundler -v 2.2.8
-        bundle install
-        bundle exec rake
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.0.0
+
+      - name: Ruby gem cache
+        uses: actions/cache@v2
+
+      - name: Install gems
+        run: |
+          gem install bundler -v 2.2.8
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+
+      - name: Run Rubocop
+        run: |
+          rubocop
+
+  rpsecs:
+    name: Rspecs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.0.0
+
+      - name: Ruby gem cache
+        uses: actions/cache@v2
+
+      - name: Install gems
+        run: |
+          gem install bundler -v 2.2.8
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+
+      - name: Run Rspecs
+        run: |
+          rspec
