@@ -2,7 +2,6 @@
 
 require "simplecov"
 
-ENV["BRANCH_COVERAGE"].to_s.length > 0 ? SimpleCov.enable_coverage(:branch) : nil # [2020-10-18]: this is not compatible with Undercover yet.
 # SimpleCov::Formatter::LcovFormatter.config.report_with_single_file = true
 SimpleCov.formatters = [
   SimpleCov::Formatter::HTMLFormatter
@@ -10,7 +9,7 @@ SimpleCov.formatters = [
 
 SimpleCov.start do
   track_files "{app,lib}/**/*.rb"
-  add_filter(/^\/spec\//) # For RSpec
+  add_filter(%r{^/spec/}) # For RSpec
 end
 
 RSpec.configure do |config|

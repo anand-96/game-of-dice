@@ -4,7 +4,7 @@ require "pry"
 require "faker"
 require_relative "../../lib/constant"
 
-RSpec.describe GameCli do
+RSpec.describe GameCli do # rubocop:disable Metrics/BlockLength
   subject { described_class.instance }
   let(:player_name) { Faker::Name.first_name }
 
@@ -25,7 +25,8 @@ RSpec.describe GameCli do
 
   context "#prompt_skip_player" do
     it "should display skip player message" do
-      expect(subject.cli).to receive(:say).with("\n => Oops! #{player_name}, you can throw dice in next turn, your turn is skip")
+      expect(subject.cli).to receive(:say)
+        .with("\n => Oops! #{player_name}, you can throw dice in next turn, your turn is skip")
       subject.send(:prompt_skip_player, player_name)
     end
   end

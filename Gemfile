@@ -5,9 +5,9 @@ source "https://rubygems.org"
 gem "highline"
 
 group :development, :test do
-  gem "pry"
-  gem "rubocop"
-  gem "rspec"
   gem "faker"
-  gem 'simplecov'
+  gem "pry"
+  gem "rspec"
+  gem "rubocop"
+  gem "simplecov"
 end
