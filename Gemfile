@@ -7,4 +7,6 @@ gem "highline"
 group :development, :test do
   gem "pry"
   gem "rubocop"
+  gem "rspec"
+  gem "faker"
 end
