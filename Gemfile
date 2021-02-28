@@ -9,4 +9,5 @@ group :development, :test do
   gem "rubocop"
   gem "rspec"
   gem "faker"
+  gem 'simplecov'
 end
